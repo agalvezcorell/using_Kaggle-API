@@ -3,7 +3,7 @@ def download_dataset():
     '''Downloads a dataset from kaggle and only keeps the csv in your data file. Beware of your own data structure:
     this creates a data directory and also moves all the .csv files next to your jupyter notebooks to it.
     Takes: url from kaggle
-    Returns: a folder with the downloaded csv
+    Returns: a folder with the downloaded and unzipped csv
     '''
     
     #Gets the name of the dataset.zip
@@ -23,12 +23,6 @@ def download_dataset():
     for i in [download, decompress, delete, make_directory, lista]:
         os.system(i)
     
-    #Gets the name of the csv (you should only have one csv when running this code)
-    lista_archivos = open('archivos.txt').read()
-    nueva = lista_archivos.split("\n")
-    
-    #Moves the .csv into the data directory
-    for i in nueva:
-        if i.endswith(".csv"):
-            move_and_delete = f"mv {i} data/dataset.csv; rm archivos.txt; say -v Monica 'moviendo el dataset'"
-            return os.system(move_and_delete)
+    #Move the csv to uour data folder
+    move_and_delete = f"mv *.csv data/dataset.csv; say -v Monica 'moviendo el dataset'"
+        return os.system(move_and_delete)
